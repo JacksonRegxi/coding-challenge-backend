@@ -1,0 +1,28 @@
+{
+  "name": "jm544/conding-challenge-backend",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/",
+      "App\\Router\\": "src/Router/",
+      "App\\Database\\": "src/Database/",
+      "App\\Utils\\": "src/Utils/",
+      "App\\Container\\": "src/Container",
+      "App\\Controllers\\": "src/Controllers/"
+    }
+  },
+  "authors": [
+    {
+      "name": "JacksonRegxi",
+      "email": "jackson@regxi.com"
+    }
+  ],
+  "require": {
+    "ext-mysqli": "*",
+    "vlucas/phpdotenv": "^5.4",
+    "twig/twig": "^3.4",
+    "illuminate/routing": "^8.83",
+    "illuminate/events": "^8.83",
+    "ext-pdo": "*",
+    "symfony/console": "^6.1"
+  }
+}
