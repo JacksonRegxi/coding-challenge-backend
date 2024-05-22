@@ -33,7 +33,8 @@ class Connection
                 $this->host,
                 $this->user,
                 $this->password,
-                $this->database
+                $this->database,
+                $this->port
             );
         } catch (Exception $exception) {
             die($exception->getMessage());

@@ -2,6 +2,7 @@
 
 namespace App\Database;
 
+use App\Container\Container;
 use App\Utils\Converter;
 
 abstract class BaseProcedure
@@ -13,7 +14,7 @@ abstract class BaseProcedure
 
     function __construct()
     {
-        $this->connection = new Connection();
+        $this->connection = Container::singleton(Connection::class);
         $this->result = [];
     }
 
