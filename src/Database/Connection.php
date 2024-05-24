@@ -54,15 +54,23 @@ class Connection
 
     function exec_procedure(string $procedure): self
     {
-        $keys = $this->parametersFormat();
         $parameters = $this->entryParameters();
 
-        $this->declaration = mysqli_query(
+        $query = "CALL $procedure (" . implode(', ', array_fill(0, count($parameters), "?")) . ")";
+
+        $this->declaration = mysqli_execute_query(
             $this->connection,
-            "CALL $procedure " . implode(', ', $keys)
+            $query,
+            $parameters
         );
 
         return $this;
+    }
+
+    function checkBool($string): bool
+    {
+        $string = strtolower($string);
+        return (in_array($string, array("true", "false", "1", "0", "yes", "no"), true));
     }
 
     function parameters(array $parameters): self
@@ -72,9 +80,13 @@ class Connection
         return $this;
     }
 
-    function get(): array
+    function get(): array|bool
     {
         $result = [];
+
+        if ($this->declaration === true || $this->declaration === false){
+            return $this->declaration;
+        }
 
         while ($row = mysqli_fetch_array($this->declaration, MYSQLI_ASSOC)) {
             $result[] = $row;
@@ -93,7 +105,7 @@ class Connection
         $parameters = [];
 
         foreach ($this->parameters as $parameter) {
-            $parameter[] = [$parameter];
+            $parameters[] = $parameter;
         }
 
         return $parameters;

@@ -13,6 +13,6 @@ trait Converter
 
     public function json(): string
     {
-        return json_encode($this->response, JSON_INVALID_UTF8_SUBSTITUTE|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        return json_encode($this->response, JSON_INVALID_UTF8_SUBSTITUTE|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
     }
 }

@@ -7,11 +7,15 @@ use App\Database\Procedures\Movie;
 
 class MovieController
 {
-    public function getMovies(): string
+    public function getMovies(): void
     {
         $movieProcedure = new Movie();
-        $value = $movieProcedure->get($_POST)->json();
-        echo $value;
-        return $value;
+        echo $movieProcedure->get($_POST, 'get_movies')->json();
+    }
+
+    public function storeMovie(): void
+    {
+        $movieProcedure = new Movie();
+        echo $movieProcedure->get($_POST, 'store_movie')->json();
     }
 }

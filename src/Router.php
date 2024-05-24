@@ -3,6 +3,7 @@
 namespace App;
 
 use Exception;
+use JetBrains\PhpStorm\NoReturn;
 
 class Router
 {
@@ -39,7 +40,15 @@ class Router
             $controller = new $controller();
             $controller->$action();
         } else {
-            throw new Exception("No route found for URI: $uri");
+            $this->abort(message: "Route not found: $uri");
         }
+    }
+
+    #[NoReturn] function abort($message, $code = 404): void
+    {
+
+        http_response_code($code);
+        echo $message;
+        exit();
     }
 }

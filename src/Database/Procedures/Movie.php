@@ -6,11 +6,18 @@ use App\Database\BaseProcedure;
 
 class Movie extends BaseProcedure
 {
-    protected function procedure(array $parameters): array
+    protected function procedure(array $parameters, string $procedure): array|bool
     {
         return $this->connection
             ->parameters($parameters)
-            ->exec_procedure('get_movies')
+            ->exec_procedure($procedure)
             ->get();
+    }
+
+    protected function query(string $query): bool
+    {
+        return $this->connection
+            ->exec_query($query)
+            ->get() > 0;
     }
 }

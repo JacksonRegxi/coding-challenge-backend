@@ -5,10 +5,7 @@ use App\Router;
 
 $router = new Router();
 
-$router->get('/', MovieController::class, 'getMovies');
+$router->get('/movies', MovieController::class, 'getMovies');
+$router->post('/store-movie', MovieController::class, 'storeMovie');
 
-try {
-    $router->dispatch();
-} catch (Exception $e) {
-
-}
+$router->dispatch();

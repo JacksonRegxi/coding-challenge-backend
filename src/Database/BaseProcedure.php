@@ -19,12 +19,19 @@ abstract class BaseProcedure
     }
 
 
-    public function get(array $parameters = []): self
+    public function get(array $parameters, string $procedure): self
     {
-        $this->result = $this->procedure($parameters);
+        $this->result = $this->procedure($parameters, $procedure);
 
         $this->response($this->result);
 
+        return $this;
+    }
+
+    public function execute(string $query): self
+    {
+        $this->result = $this->query($query);
+        $this->response($this->result);
         return $this;
     }
 
@@ -33,5 +40,7 @@ abstract class BaseProcedure
         return $this->result;
     }
 
-    protected abstract function procedure(array $parameters): array;
+    protected abstract function procedure(array $parameters, string $procedure): array|bool;
+
+    protected abstract function query(string $query): bool;
 }
