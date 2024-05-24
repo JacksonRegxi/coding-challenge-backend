@@ -4,7 +4,7 @@ namespace App\Database\Procedures;
 
 use App\Database\BaseProcedure;
 
-class Movie extends BaseProcedure
+class ExecProcedure extends BaseProcedure
 {
     protected function procedure(array $parameters, string $procedure): array|bool
     {
